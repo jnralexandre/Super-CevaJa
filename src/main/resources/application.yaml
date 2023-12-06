@@ -1,6 +1,8 @@
 server:
   servlet:
-    context-path: /poke-api
+    context-path: /cevaja-api
   port: 8081
   error:
     include-message: always
+
+wather-integration-api: https://api.weatherapi.com/v1/current.json?key=7b8fa6a32fab4e5aba7230804231605&q=porto_Alegre

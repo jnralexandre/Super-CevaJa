@@ -7,11 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="cevaja" />
+        <module name="Super-CevaJa" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Super-CevaJa" options="-parameters" />
       <module name="cevaja" options="-parameters" />
     </option>
   </component>
