@@ -20,7 +20,7 @@ public class Usuario {
     @Column
     private LocalDate dataNascimento;
     @Column
-    private String Cpf;
+    private String cpf;
     @Column
     private String username;
     @Column
