@@ -4,6 +4,7 @@ import cevaja.integration.service.UsuarioService;
 import cevaja.model.Usuario;
 import cevaja.model.dto.UsuarioRequestDTO;
 import cevaja.model.dto.UsuarioResponseDTO;
+import cevaja.model.dto.converter.UsuarioConverter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,13 @@ public class UsuarioController {
     public ResponseEntity<Void> deletarUsuarioPorUsername(@PathVariable("username") String username) {
         this.usuarioService.deletarUsuarioPorUsername(username);
         return ResponseEntity.accepted().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UsuarioResponseDTO> alterarNomeEOuSobrenomePorId(@PathVariable("id") Long id,
+                                                                           @RequestBody UsuarioRequestDTO usuarioDTO) {
+        Usuario usuarioAlterado = this.usuarioService.alterarNomeEOuSobrenomePorId(id, usuarioDTO);
+        return ResponseEntity.ok(UsuarioConverter.converterParaDTO(usuarioAlterado));
     }
 
 }

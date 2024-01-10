@@ -7,16 +7,12 @@ import java.time.LocalDate;
 @Data
 public class UsuarioRequestDTO {
 
-    private String nome;
-
-    private String sobrenome;
-
-    private LocalDate dataNascimento;
+    private String name;
+    private String lastName;
+    private LocalDate dateOfBirth;
     private String cpf;
-
     private String username;
-
     private String email;
-    private String senha;
+    private String password;
 
 }

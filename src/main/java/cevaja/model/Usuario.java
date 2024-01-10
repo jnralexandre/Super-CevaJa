@@ -14,11 +14,11 @@ public class Usuario {
     @GeneratedValue
     private Long id;
     @Column
-    private String nome;
+    private String name;
     @Column
-    private String sobrenome;
+    private String lastName;
     @Column
-    private LocalDate dataNascimento;
+    private LocalDate dateOfBirth;
     @Column
     private String cpf;
     @Column
@@ -26,6 +26,6 @@ public class Usuario {
     @Column
     private String email;
     @Column
-    private String senha;
+    private String password;
 
 }
