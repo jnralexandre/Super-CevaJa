@@ -1,15 +1,15 @@
 package cevaja.model.dto.converter;
 
-import cevaja.model.Usuario;
-import cevaja.model.dto.UsuarioRequestDTO;
-import cevaja.model.dto.UsuarioResponseDTO;
+import cevaja.model.User;
+import cevaja.model.dto.UserRequestDTO;
+import cevaja.model.dto.UserResponseDTO;
 import lombok.Data;
 
 @Data
-public class UsuarioConverter {
+public class UserConverter {
 
-    public static Usuario converterParaEntidade(UsuarioRequestDTO usuarioRequestDTO) {
-        Usuario usuarioEntity = new Usuario();
+    public static User converterParaEntidade(UserRequestDTO usuarioRequestDTO) {
+        User usuarioEntity = new User();
         usuarioEntity.setName(usuarioRequestDTO.getName());
         usuarioEntity.setLastName(usuarioRequestDTO.getLastName());
         usuarioEntity.setDateOfBirth(usuarioRequestDTO.getDateOfBirth());
@@ -21,8 +21,8 @@ public class UsuarioConverter {
         return usuarioEntity;
     }
 
-    public static UsuarioResponseDTO converterParaDTO(Usuario usuario) {
-        UsuarioResponseDTO usuarioResponseDTO = new UsuarioResponseDTO();
+    public static UserResponseDTO converterParaDTO(User usuario) {
+        UserResponseDTO usuarioResponseDTO = new UserResponseDTO();
         usuarioResponseDTO.setId(usuario.getId());
         usuarioResponseDTO.setName(usuario.getName());
         usuarioResponseDTO.setLastName(usuario.getLastName());

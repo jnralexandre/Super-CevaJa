@@ -1,9 +1,9 @@
 package cevaja.integration.service;
 
-import cevaja.model.Usuario;
-import cevaja.model.dto.UsuarioRequestDTO;
-import cevaja.model.dto.UsuarioResponseDTO;
-import cevaja.model.dto.converter.UsuarioConverter;
+import cevaja.model.User;
+import cevaja.model.dto.UserRequestDTO;
+import cevaja.model.dto.UserResponseDTO;
+import cevaja.model.dto.converter.UserConverter;
 import cevaja.repository.UsuarioRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -28,15 +28,15 @@ public class UserService {
         this.usuarioRepository = userRepository;
     }
 
-    public Usuario buscarUsuarioPorNomeUsuario(String username) {
+    public User buscarUsuarioPorNomeUsuario(String username) {
         return usuarioRepository.findByUsername(username);
     }
 
-    public Usuario buscarUsuarioPorEmail(String email) {
+    public User buscarUsuarioPorEmail(String email) {
         return usuarioRepository.findByEmail(email);
     }
 
-    public void cadastrarUsuario(UsuarioRequestDTO usuarioRequestDTO) {
+    public void cadastrarUsuario(UserRequestDTO usuarioRequestDTO) {
         String name = usuarioRequestDTO.getName();
         String lastName = usuarioRequestDTO.getLastName();
         LocalDate dateOfBirth = usuarioRequestDTO.getDateOfBirth();
@@ -45,8 +45,8 @@ public class UserService {
         String email = usuarioRequestDTO.getEmail();
         String password = usuarioRequestDTO.getPassword();
 
-        Usuario usuarioExistentePorUsername = buscarUsuarioPorNomeUsuario(username);
-        Usuario usuarioExistentePorEmail = buscarUsuarioPorEmail(email);
+        User usuarioExistentePorUsername = buscarUsuarioPorNomeUsuario(username);
+        User usuarioExistentePorEmail = buscarUsuarioPorEmail(email);
 
         // Verifica se Usuário existe pelo seu nome
         if (usuarioExistentePorUsername != null) {
@@ -59,23 +59,23 @@ public class UserService {
         }
 
         // A partir daqui, pode adicionar o Usuário no BD
-        Usuario usuarioParaAdicionar = UsuarioConverter.converterParaEntidade(usuarioRequestDTO);
+        User usuarioParaAdicionar = UserConverter.converterParaEntidade(usuarioRequestDTO);
         usuarioRepository.save(usuarioParaAdicionar);
     }
 
-    public List<UsuarioResponseDTO> buscarTodosUsuarios() {
-        List<Usuario> listaUsuarios = usuarioRepository.findAll();
+    public List<UserResponseDTO> buscarTodosUsuarios() {
+        List<User> listaUsuarios = usuarioRepository.findAll();
 
-        List<UsuarioResponseDTO> listaUsuariosResponseDTO = new ArrayList<>();
-        for (Usuario u : listaUsuarios) {
-            listaUsuariosResponseDTO.add(UsuarioConverter.converterParaDTO(u));
+        List<UserResponseDTO> listaUsuariosResponseDTO = new ArrayList<>();
+        for (User u : listaUsuarios) {
+            listaUsuariosResponseDTO.add(UserConverter.converterParaDTO(u));
         }
 
         return listaUsuariosResponseDTO;
     }
 
     public void deletarUsuarioPorUsername(String username) {
-        Usuario usuarioParaDeletar = usuarioRepository.findByUsername(username);
+        User usuarioParaDeletar = usuarioRepository.findByUsername(username);
 
         if (usuarioParaDeletar == null) {
             throw new ResponseStatusException(
@@ -86,15 +86,15 @@ public class UserService {
         }
     }
 
-    public Usuario alterarNomeEOuSobrenomePorId(Long id, UsuarioRequestDTO usuarioRequestDTO) {
-        Optional<Usuario> usuarioOptionalParaAlterar = usuarioRepository.findById(id);
+    public User alterarNomeEOuSobrenomePorId(Long id, UserRequestDTO usuarioRequestDTO) {
+        Optional<User> usuarioOptionalParaAlterar = usuarioRepository.findById(id);
 
         if (usuarioOptionalParaAlterar.isEmpty()) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, MENSAGEM_PARA_ID_INEXISTENTE
             );
         } else {
-            Usuario usuarioParaAlterar = usuarioOptionalParaAlterar.get();
+            User usuarioParaAlterar = usuarioOptionalParaAlterar.get();
             String nameUser = usuarioRequestDTO.getName();
 
             if (nameUser != null) {

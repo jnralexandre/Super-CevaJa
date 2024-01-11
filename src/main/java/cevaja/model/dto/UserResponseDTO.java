@@ -5,14 +5,13 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Data
-public class UsuarioRequestDTO {
+public class UserResponseDTO {
 
+    private Long id;
     private String name;
     private String lastName;
-    private LocalDate dateOfBirth;
-    private String cpf;
+    private LocalDate dataOfBirth;
     private String username;
     private String email;
-    private String password;
 
 }

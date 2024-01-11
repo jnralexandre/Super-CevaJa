@@ -1,12 +1,9 @@
 package cevaja.integration.service;
 
 import cevaja.model.Cerveja;
-import cevaja.model.Usuario;
 import cevaja.model.dto.CervejaRequestDTO;
 import cevaja.model.dto.CervejaResponseDTO;
-import cevaja.model.dto.UsuarioRequestDTO;
 import cevaja.model.dto.converter.CervejaConverter;
-import cevaja.model.dto.converter.UsuarioConverter;
 import cevaja.repository.CervejaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

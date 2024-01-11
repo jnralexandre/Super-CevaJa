@@ -1,10 +1,8 @@
 package cevaja.model.dto.converter;
 
 import cevaja.model.Cerveja;
-import cevaja.model.Usuario;
 import cevaja.model.dto.CervejaRequestDTO;
 import cevaja.model.dto.CervejaResponseDTO;
-import cevaja.model.dto.UsuarioRequestDTO;
 import lombok.Data;
 
 @Data

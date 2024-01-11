@@ -1,10 +1,10 @@
 package cevaja.controller;
 
 import cevaja.integration.service.UserService;
-import cevaja.model.Usuario;
-import cevaja.model.dto.UsuarioRequestDTO;
-import cevaja.model.dto.UsuarioResponseDTO;
-import cevaja.model.dto.converter.UsuarioConverter;
+import cevaja.model.User;
+import cevaja.model.dto.UserRequestDTO;
+import cevaja.model.dto.UserResponseDTO;
+import cevaja.model.dto.converter.UserConverter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,13 +22,13 @@ public class UserController {
     }
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<Void> cadastrarUsuario(@RequestBody UsuarioRequestDTO usuarioRequestDTO) {
+    public ResponseEntity<Void> cadastrarUsuario(@RequestBody UserRequestDTO usuarioRequestDTO) {
         usuarioService.cadastrarUsuario(usuarioRequestDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping("/buscar-usuarios")
-    public ResponseEntity<List<UsuarioResponseDTO>> buscarTodosUsuarios() {
+    public ResponseEntity<List<UserResponseDTO>> buscarTodosUsuarios() {
         return ResponseEntity.ok(this.usuarioService.buscarTodosUsuarios());
     }
 
@@ -39,10 +39,10 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UsuarioResponseDTO> alterarNomeEOuSobrenomePorId(@PathVariable("id") Long id,
-                                                                           @RequestBody UsuarioRequestDTO usuarioDTO) {
-        Usuario usuarioAlterado = this.usuarioService.alterarNomeEOuSobrenomePorId(id, usuarioDTO);
-        return ResponseEntity.ok(UsuarioConverter.converterParaDTO(usuarioAlterado));
+    public ResponseEntity<UserResponseDTO> alterarNomeEOuSobrenomePorId(@PathVariable("id") Long id,
+                                                                        @RequestBody UserRequestDTO usuarioDTO) {
+        User usuarioAlterado = this.usuarioService.alterarNomeEOuSobrenomePorId(id, usuarioDTO);
+        return ResponseEntity.ok(UserConverter.converterParaDTO(usuarioAlterado));
     }
 
 }
