@@ -21,7 +21,7 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    @PostMapping("/cadastro")
+    @PostMapping("/cadastrar")
     public ResponseEntity<Void> cadastrarUsuario(@RequestBody UsuarioRequestDTO usuarioRequestDTO) {
         usuarioService.cadastrarUsuario(usuarioRequestDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);

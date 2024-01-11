@@ -21,6 +21,7 @@ public class CervejaService {
     private CervejaRepository cervejaRepository;
 
     private static final String MENSAGEM_PARA_TIPO_CERVEJA_EXISTENTE = "O tipo da cerveja já possuí um cadastro no Banco de Dados";
+    private static final String MENSAGEM_PARA_TIPO_CERVEJA_INEXISTENTE = "Não é possível deletar uma Cerveja inexistente.";
 
     public CervejaService(CervejaRepository cervejaRepository) {
         this.cervejaRepository = cervejaRepository;
@@ -53,6 +54,18 @@ public class CervejaService {
         }
 
         return listaCervejasResponseDTO;
+    }
+
+    public void deletarCervejaPorTipo(String type) {
+        Cerveja cervejaParaDeletar = cervejaRepository.findByType(type);
+
+        if (cervejaParaDeletar == null) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, MENSAGEM_PARA_TIPO_CERVEJA_INEXISTENTE
+            );
+        } else {
+            cervejaRepository.delete(cervejaParaDeletar);
+        }
     }
 
 }

@@ -20,7 +20,7 @@ public class CervejaController {
         this.cervejaService = cervejaService;
     }
 
-    @PostMapping("/cadastro")
+    @PostMapping("/cadastrar")
     public ResponseEntity<Void> cadastrarCerveja(@RequestBody CervejaRequestDTO cervejaRequestDTO) {
         cervejaService.cadastrarCerveja(cervejaRequestDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -30,4 +30,11 @@ public class CervejaController {
     public ResponseEntity<List<CervejaResponseDTO>> buscarTodasCervejas() {
         return ResponseEntity.ok(this.cervejaService.buscarTodasCervejas());
     }
+
+    @DeleteMapping("/deletar-usuarios/{type}")
+    public ResponseEntity<Void> deletarCervejaPorTipo(@PathVariable("type") String type) {
+        this.cervejaService.deletarCervejaPorTipo(type);
+        return ResponseEntity.accepted().build();
+    }
+
 }
