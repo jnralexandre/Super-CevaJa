@@ -4,6 +4,7 @@ import cevaja.model.Cerveja;
 import cevaja.model.Usuario;
 import cevaja.model.dto.CervejaRequestDTO;
 import cevaja.model.dto.CervejaResponseDTO;
+import cevaja.model.dto.UsuarioRequestDTO;
 import cevaja.model.dto.converter.CervejaConverter;
 import cevaja.model.dto.converter.UsuarioConverter;
 import cevaja.repository.CervejaRepository;
@@ -14,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CervejaService {
@@ -22,6 +24,7 @@ public class CervejaService {
 
     private static final String MENSAGEM_PARA_TIPO_CERVEJA_EXISTENTE = "O tipo da cerveja já possuí um cadastro no Banco de Dados";
     private static final String MENSAGEM_PARA_TIPO_CERVEJA_INEXISTENTE = "Não é possível deletar uma Cerveja inexistente.";
+    private static final String MENSAGEM_PARA_ID_INEXISTENTE = "Não é possível alterar uma Cerveja inexistente.";
 
     public CervejaService(CervejaRepository cervejaRepository) {
         this.cervejaRepository = cervejaRepository;
@@ -66,6 +69,28 @@ public class CervejaService {
         } else {
             cervejaRepository.delete(cervejaParaDeletar);
         }
+    }
+
+    public Cerveja alteraPrecoCervejaPorId(Long id, CervejaRequestDTO cervejaRequestDTO) {
+        Optional<Cerveja> cervejaOptionalParaAlterar = cervejaRepository.findById(id);
+
+        if (cervejaOptionalParaAlterar.isEmpty()) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, MENSAGEM_PARA_ID_INEXISTENTE
+            );
+        } else {
+            Cerveja cervejaParaAlterar = cervejaOptionalParaAlterar.get();
+            BigDecimal price = cervejaRequestDTO.getPrice();
+
+            if (price != null) {
+                cervejaParaAlterar.setPrice(price);
+            }
+
+            cervejaRepository.save(cervejaParaAlterar);
+
+            return cervejaParaAlterar;
+        }
+
     }
 
 }

@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UsuarioService {
+public class UserService {
 
     private UsuarioRepository usuarioRepository;
 
@@ -24,7 +24,7 @@ public class UsuarioService {
     private static final String MENSAGEM_PARA_USERNAME_INEXISTENTE = "Não é possível deletar um Usuário inexistente.";
     private static final String MENSAGEM_PARA_ID_INEXISTENTE = "Não é possível alterar um Usuário inexistente.";
 
-    public UsuarioService(UsuarioRepository userRepository) {
+    public UserService(UsuarioRepository userRepository) {
         this.usuarioRepository = userRepository;
     }
 
@@ -86,7 +86,7 @@ public class UsuarioService {
         }
     }
 
-    public Usuario alterarNomeEOuSobrenomePorId(Long id, UsuarioRequestDTO usuarioDTO) {
+    public Usuario alterarNomeEOuSobrenomePorId(Long id, UsuarioRequestDTO usuarioRequestDTO) {
         Optional<Usuario> usuarioOptionalParaAlterar = usuarioRepository.findById(id);
 
         if (usuarioOptionalParaAlterar.isEmpty()) {
@@ -95,13 +95,13 @@ public class UsuarioService {
             );
         } else {
             Usuario usuarioParaAlterar = usuarioOptionalParaAlterar.get();
-            String nameUser = usuarioDTO.getName();
+            String nameUser = usuarioRequestDTO.getName();
 
             if (nameUser != null) {
                 usuarioParaAlterar.setName(nameUser);
             }
 
-            String lastNameUser = usuarioDTO.getLastName();
+            String lastNameUser = usuarioRequestDTO.getLastName();
             if (lastNameUser != null) {
                 usuarioParaAlterar.setLastName(lastNameUser);
             }

@@ -1,6 +1,6 @@
 package cevaja.controller;
 
-import cevaja.integration.service.UsuarioService;
+import cevaja.integration.service.UserService;
 import cevaja.model.Usuario;
 import cevaja.model.dto.UsuarioRequestDTO;
 import cevaja.model.dto.UsuarioResponseDTO;
@@ -13,11 +13,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/usuarios")
-public class UsuarioController {
+public class UserController {
 
-    private UsuarioService usuarioService;
+    private UserService usuarioService;
 
-    public UsuarioController(UsuarioService usuarioService) {
+    public UserController(UserService usuarioService) {
         this.usuarioService = usuarioService;
     }
 
